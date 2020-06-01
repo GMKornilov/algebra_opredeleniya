@@ -1,0 +1,163 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage[english, russian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{array}
+\usetikzlibrary{positioning}
+\definecolor{processblue}{cmyk}{0.96,0,0,0}
+
+\geometry{
+    a4paper,
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.2cm,
+    right=2.2cm
+}
+
+\onehalfspacing
+
+
+\renewcommand{\thesection}{
+    \underline{\textbf{№\arabic{section}}}
+}
+
+\renewcommand{\thesubsection}{
+    \textbf{\arabic{section}.\asbuk{subsection}}
+}
+
+\newcommand{\mathInduction}[2]{
+\underline{База:}\\
+#1
+\underline{Шаг индукции:}\\
+#2
+}
+
+\newcommand{\mathMod}[2]{
+    #1\%#2
+}
+
+\newcommand{\Z}[0]{
+    \mathbb{Z}
+}
+
+\newcommand{\Q}[0]{
+    \mathbb{Q}
+}
+
+\newcommand{\N}[0]{
+    \mathbb{N}
+}
+
+\newcommand{\R}[0]{
+    \mathbb{R}
+}
+
+\newcommand{\Inject}[1]{
+    \stackrel{#1}{\lesssim}
+}
+
+\newcommand{\allsubsets}[1]{
+    \mathcal{P}(#1)
+}
+
+\def\rddots#1{\cdot^{\cdot^{\cdot^{#1}}}}
+
+\newcommand{\Knuth}[2]{
+    \underbrace{#1^{#1^{\rddots#1}}}_{#2 \; копий \; #1}
+}
+
+\begin{document}
+\section{Сформулируйте утверждение о связи размерностей ядра и образа линейного отображения.}
+Пусть $\varphi : V_1 \longrightarrow V_2$ и $dim V_1 = n$.\\
+Тогда $dim \; Ker \varphi + dim \; Im \varphi = n = dim V_1$.
+
+\section{Дайте определения собственного вектора и собственного значения линейного оператора.}
+Число $\lambda$ называется собственным числом линейного оператора $\varphi: V \longrightarrow V$,
+если существует вектор $v \neq 0$ такой, что $\varphi(v) = \lambda v$.
+При этом вектор $v$ называется собственным вектором оператора $\varphi$.
+
+\section{Дайте определения характеристического уравнения и характеристического многочлена квадратной матрицы.}
+Для произвольной квадратной матрицы $A$ многочлен вида $\chi_A(\lambda) = det(A - \lambda E)$ называется 
+характеристическим многочленом, а уравнение $\chi_A(\lambda) = 0$ называется характеристическим
+уравнением матрицы $A$.
+
+\section{Сформулируйте утверждение о связи характеристического уравнения и спектра линейного оператора.}
+\underline{Примечание} Здесь немного <<отсебятины>>, потому что переписывал с грубой формулы.
+\\
+Следующие условия эквивалентны:
+\begin{enumerate}
+    \item $\lambda$ - собственное значение линейного оператора $A$.
+    \item $|A - \lambda E| = 0$(т.е. $\chi_A(\lambda) = 0$ или $\lambda$ является корнем характеристического многочлена $A$).
+\end{enumerate}
+
+\section{Дайте определение собственного подпространства.}
+Собственным подпространством, отвечающим собственному значению $\lambda_i$ оператора $A$
+называется множество:
+$$ V_{\lambda_i} = \left\{x \in V \mid Ax = \lambda_i x \right\}$$
+
+\section{Дайте определения алгебраической и геометрической кратности собственного значения. Какое неравенство их связывает?}
+Алгебраической кратностью собственного значения называют его кратность как корня характеристического уравнения.
+\\
+\underline{Пример} $\chi_A(\lambda) = (\lambda - 5)^3 (\lambda - 6)^2 (\lambda + 3)$:
+алгебраическая кратность собственного значения $\lambda = 5$ равна 3.
+\\
+Геометрической кратностью собственного значения называют размерность собственного подпространства $V_{\lambda_i}$.
+\\
+Геометрическая кратность собственного значения всегда положительна и не превосходит его алгебраической кратности.
+
+\section{Каким свойством обладают собственные векторы линейного оператора, отвечающие различным собственным значениям?}
+Пусть $\lambda_1, \ldots, \lambda_k$ - различные собственные значения линейного оператора $A$
+($\forall i \neq j \;\; \lambda_i \neq \lambda_j$), 
+а $v_1, \ldots, v_k$ - соответствующие им собственные вектора.
+Тогда вектора $v_1, \ldots v_k$ линейно независимы.
+
+\section{Сформулируйте критерий диагональности матрицы оператора.}
+Матрица линейного оператора $A$ является диагональной в данном базисе $\iff$ все вектора этого базиса являются собственными векторами 
+данного линейного оператора.
+
+\section{Сформулируйте критерий диагонализируемости матрицы оператора с использованием понятия геометрической кратности.}
+Матрица линейного оператора диагонализируема $\iff$ для любого его собственного значения геометрическая кратность
+равна алгебраической кратности.
+
+\section{Дайте определение жордановой клетки. Сформулируйте теорему о жордановой нормальной форме матрицы оператора.}
+Жорданова клетка размера $m \times m$ соответствующего собственного значения $\lambda_i$ - матрица вида:
+$$
+J_m(\lambda_i) = \underbrace{
+\begin{pmatrix}
+\lambda_i & 1 & 0 & 0 & \cdots & 0\\
+0 & \lambda_i & 1 & 0 & \cdots & 0\\
+0 & 0 & \lambda_i & 1 & \cdots & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & 0 & 0 & \cdots & \lambda_i\\
+\end{pmatrix}}_{\displaystyle m}
+\left.\vphantom{\begin{pmatrix}
+1\lambda_i & 1 & 0 & 0 & \cdots & 0\\
+0 & \lambda_i & 1 & 0 & \cdots & 0\\
+0 & 0 & \lambda_i & 1 & \cdots & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & 0 & 0 & \cdots & \lambda_i\\
+\end{pmatrix}}\right\}m
+$$
+Жорданова нормальная форма матрицы линейного оператора - блочно-диагональная матрица
+с Жордановыми клетками на диагонали.
+$$
+J = 
+\begin{pmatrix}
+    J_{m_1}(\lambda_1) & \cdots & \cdots & 0 \\
+    0 & J_{m_2}(\lambda_2) & \cdots & 0 \\
+    \vdots & \vdots & \ddots & \vdots \\
+    0 & \cdots & \cdots & J_{m_s}(\lambda_s)\\
+\end{pmatrix}
+$$
+\underline{Теорема} Любая матрица $A \in M_n(\mathbb{F})$ приводится заменой базиса к Жордановой нормальной форме 
+над алгебраически замкнутым полем.
+\end{document}
