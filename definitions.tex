@@ -9,8 +9,24 @@
 \usepackage{amsthm}
 \usepackage{setspace}
 \usepackage{geometry}
+
 \usepackage{mathtools}
 \usepackage{tikz}
+\usetikzlibrary{fit}
+\tikzset{%
+  highlight/.style={rectangle,rounded corners,fill=red!15,draw,fill opacity=0.5,thick,inner sep=0pt}
+}
+\newcommand{\tikzmark}[2]{
+    \tikz[overlay,remember picture,baseline=(#1.base)] \node (#1) {#2};
+}
+%
+\newcommand{\Highlight}[2]{%
+    \tikz[overlay,remember picture]{
+        \node[highlight,fit=(#1.north west) (#2.south east)] (#1) {};
+    }
+}
+
+
 \usepackage{array}
 \usetikzlibrary{positioning}
 \definecolor{processblue}{cmyk}{0.96,0,0,0}
@@ -160,4 +176,54 @@ J =
 $$
 \underline{Теорема} Любая матрица $A \in M_n(\mathbb{F})$ приводится заменой базиса к Жордановой нормальной форме 
 над алгебраически замкнутым полем.
+
+\section{ Выпишите формулу для количества жордановых клеток заданного размера.}
+Пусть $q_h$ - число жордановых клеток размера $h \times h$ c $\lambda_i$ на диагонали.
+Пример:
+$$
+\begin{aligned}
+\begin{pmatrix}
+    \tikzmark{A}{3} & 0 & 0 & 0 & 0 & 0 \\
+    0 & \tikzmark{B}{5} & 1 & 0 & 0 & 0 \\
+    0 & 0 & \tikzmark{C}{5} & 0 & 0 & 0 \\
+    0 & 0 & 0 & \tikzmark{D}{5} & 1 & 0 \\
+    0 & 0 & 0 & 0 & 5 & 1 \\
+    0 & 0 & 0 & 0 & 0 & \tikzmark{E}{5}
+\end{pmatrix}
+\Highlight{A}{A}
+\Highlight{B}{C}
+\Highlight{D}{E}
+\\
+\lambda_1 = -3, \lambda_2 = 5
+\\
+q_1(\lambda_1) = 1, q_2(\lambda_1) = 0,
+\\
+q_1(\lambda_1) = 0, q_2(\lambda_2) = 1, q_3(\lambda_2) = 1, q_4(\lambda_2) = 0
+\\
+\chi_A(\lambda) = (\lambda + 3)(\lambda - 5)^5
+\end{aligned}
+$$
+\underline{Утверждение} Для любого собственного значения $\lambda_i \;\; q_h = r_{h + 1} - 2r_h + r_{h - 1}$, где 
+$r_h = Rg(A - \lambda E)^h, r_0 = RgE$
+
+\section{Сформулируйте теорему Гамильтона—Кэли.}
+$\chi_A(A) = 0$, где $\chi_A$ - характеристический многочлен матрицы $A$.
+
+\section{Дайте определение корневого подпространства.}
+Корневым подпространством оператора $A$, соответствующим собственному значению $\lambda_i$
+называют множество:
+$K_{\lambda_i} = Ker(A - \lambda_i E)^{m_i}$, где $m_i$ - алгебраическая кратность
+собственного значения.
+
+\section{Дайте определение минимального многочлена линейного оператора.}
+Минимальным многочленом линейного оператора $A$ называется многочлен $\mu_A(\lambda)$ такой, что:
+\begin{enumerate}
+    \item $\mu_A(A) = 0$
+    \item $\mu_A \neq 0$
+    \item Степень многочлена $\mu_A$ минимальна и старший коэффициент равен 1.
+\end{enumerate}
+
+\section{Дайте определение инвариантного подпространства.}
+$L$ называется инвариантным подпространством линейного оператора
+$A: V \longrightarrow V$, если $\forall x \in L \;\; Ax \in L$(т.е. $A(L) \subset L$)
 \end{document}
